@@ -14,12 +14,13 @@ function Animals(animals) {
 
 
   Animals.prototype.render = function () {
+
+
     let containerPerson = $('.photo-template').clone();
     // console.log(containerPerson.find('h2'));
     containerPerson.find('h2').text(this.title);
     containerPerson.find('img').attr('src', `${this.image_url}`);
-    containerPerson.find('p').text(this.description);
-    
+    containerPerson.find('p').text(this.description); 
     containerPerson.removeClass('photo-template');
     containerPerson.attr("class", `${this.keyword} filter`);
     $('main').append(containerPerson);
@@ -48,14 +49,16 @@ else{
 let numOfPagge = $('button').on('click',function(){
 
   numOfPagge = $(this).attr('id')
-
+  
   ajaxFunc(numOfPagge);
   
 })
 
-function ajaxFunc(numOfPagge){
+ajaxFunc(1);
 
-  $.ajax(`"data/page-${numOfPagge}.json"`, ajaxData).then((data) => {
+function ajaxFunc(numOfPagge){
+  
+  $.ajax(`data/page-${numOfPagge}.json`, ajaxData).then((data) => {
     data.forEach((animals) => {
       let titleObject = new Animals(animals);
       console.log(titleObject);
@@ -69,6 +72,7 @@ function ajaxFunc(numOfPagge){
   $(".select").on("change",function(event){
     let selectKeyword=this.value;
     if(selectKeyword!=="select"){
+      console.log(selectKeyword);
       renderFilterhorns(selectKeyword);
     }
   });
