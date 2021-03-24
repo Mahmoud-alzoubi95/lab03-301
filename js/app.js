@@ -44,16 +44,27 @@ else{
     dataType: "json",
   };
   
-  $.ajax("data/page-1.json", ajaxData).then((data) => {
+
+let numOfPagge = $('button').on('click',function(){
+
+  numOfPagge = $(this).attr('id')
+
+  ajaxFunc(numOfPagge);
+  
+})
+
+function ajaxFunc(numOfPagge){
+
+  $.ajax(`"data/page-${numOfPagge}.json"`, ajaxData).then((data) => {
     data.forEach((animals) => {
       let titleObject = new Animals(animals);
-  console.log(titleObject);
+      console.log(titleObject);
       // dogObject.renderManually();
-      titleObject.render();
+       titleObject.render();
     });
   });
 
-
+}
 
   $(".select").on("change",function(event){
     let selectKeyword=this.value;
@@ -73,3 +84,5 @@ else{
 }
   })
 }
+
+
