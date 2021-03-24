@@ -1,0 +1,41 @@
+.filter {
+    display: block;
+}
+header{
+    text-align: center;
+}
+main{
+    width: 90%;
+    margin-left: 80px;
+}
+div{
+
+    display: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+
+img{
+    border-radius: 10%;
+    border: solid 5px rgb(95, 0, 44);
+ 
+}
+h2{
+    font-size: 15px;
+    color: #fa8072;
+    text-align: center;
+}
+p{
+
+font-size: 10px;  
+width: 250px;
+text-align: center;
+
+}
+select{
+
+    text-align: center;
+}
+footer{
+    clear: both;
+}
