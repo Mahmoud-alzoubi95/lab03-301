@@ -15,38 +15,25 @@ function Animals(animals) {
 
   Animals.prototype.render = function () {
 
-
-    let containerPerson = $('.photo-template').clone();
-    // console.log(containerPerson.find('h2'));
-    containerPerson.find('h2').text(this.title);
-    containerPerson.find('img').attr('src', `${this.image_url}`);
-    containerPerson.find('p').text(this.description); 
-    containerPerson.removeClass('photo-template');
-    containerPerson.attr("class", `${this.keyword} filter`);
-    $('main').append(containerPerson);
+    let musTemplate = $('#templete').html();
+    let newObj = Mustache.render(musTemplate, this);
+    $('section').append(newObj);
 
     // this.optionRender();
 }
 
-// Animals.prototype.optionRender=function() {
-
-// let opt = `<option>${this.keyword}</option>`
-
-// if(arrofOption.includes(this.keyword)===true){}
-// else{
-//   arrofOption.push(this.keyword);
-//   $(".select").append(opt);
-// }
-// }
-
 
 function optionListRender(myImages,myKeyWord){
+  $(".select1").empty();
+  const opt1 = `<option value="" class="option" >Filter by Keyword</option>`
+  $(".select1").append(opt1);
   myImages.forEach((animals)=>{
 if(myKeyWord.includes(animals.keyword)===true){}
 else{
   myKeyWord.push(animals.keyword);
-  const opt = `<option>${animals.keyword}</option>`
-  $(".select").append(opt);
+  // containerPerson.find(".keywordoptions").text(`${animals.keyword}`)
+   const opt = `<option>${animals.keyword}</option>`
+   $(".select1").append(opt);
 }
 });
 }
@@ -60,8 +47,6 @@ let numOfPagge = $('button').on('click',function(){
   numOfPagge = $(this).attr('id')
   // renderFilterhorns(selectKeyword);
   ajaxFunc(numOfPagge);
-  
-  
 })
 
 ajaxFunc(1);
@@ -80,52 +65,50 @@ function ajaxFunc(numOfPagge){
       // titleObject.optionRender();
       titleObject.render();
     });
-
     optionListRender(myImages,myKeyWord);
+
     // console.log(myKeyWord);
   });
 }
 
+$('#select2').on('change', function() {
 
+  let selectedSortOption = $('#select2').val();
+  // let selectedoption1 = $('.select1').val();
 
-$('#select2').on('click', function() {
-
-  let selectedoption = $('#select2').val();
-  // let selectedoption1 = $('#select1').val();
-
-  if (selectedoption == 'byTitle') {
-    arrOfprop.sort((a, b) => {
+  if (selectedSortOption == 'byTitle') {
+    arrOfprop.sort((a,b) => {
           if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
           else if (a.title < b.title) return -1;
           else return 0;
       });
-      // arrOfprop;
-      // render2 to do the render
-      // render2($('#select1').val());//
-      render2(selectedoption1); //Where "selectedoption1" is the value of the filter
+      $('div').hide();
+      for (var i = 0; i < arrOfprop.length; i++) {
 
-  } else if (selectedoption == 'byHorn') {
+        arrOfprop[i].render();
+
+      }
+
+  } else if (selectedSortOption == 'byHorn') {
     arrOfprop.sort((a, b) => {
           if (a.horns > b.horns) return 1;
           else if (a.horns < b.horns) return -1;
           else return 0;
       });
-      // arrOfprop;
-      render2(selectedoption1);
-      // let selectedoption = $('#select1').val();
-      // render2(selectedoption);
-      // render2($('#select1').val());
-
+      $('div').hide();
+      for (var i = 0; i < arrOfprop.length; i++) {
+      
+        arrOfprop[i].render();
+      }
   }
   console.log(arrOfprop);
-
+  // console.log(selectedSortOption);
 });
-
 
 function render2(value) {
 
   // To initiat the render for the selected keyword;
-  $('section').empty();
+  // $('section').empty();
 
   for (var i = 0; i < arrOfprop.length; i++) {
       if ((arrOfprop[i].keyword) == value || value == 'filter by keword') {
@@ -139,15 +122,15 @@ function render2(value) {
 }
 
 
-
-  $(".select").on("change",function(event){
+  $(".select1").on("change",function(event){
     let selectKeyword=this.value;
     if(selectKeyword!=="select"){
       // console.log(selectKeyword);
       renderFilterhorns(selectKeyword);
+      // render2(selectKeyword);
+
     }
   });
-
 
 function renderFilterhorns(selectKeyword){
   arrOfprop.forEach((kind)=>{
@@ -159,3 +142,6 @@ else{
 }
   })
   }
+
+
+

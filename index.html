@@ -8,10 +8,10 @@
       <link rel="stylesheet" href="css/module.css">
 
       <script id="templete" type="text/x-tmpl-mustache">
-        <div class="container">
+        <div class="{{keyword}} filter">
             <h2>{{title}}</h2>
 
-            <img class="imegSection" src={{imagePath}}>
+            <img class="imegSection" src={{image_url}}>
             <p>{{description}}</p>
         </div>
     </script>
@@ -23,8 +23,9 @@
   <body>
     <header>
       <h1>The Gallery of Horns</h1>
-      <select name="horns" class="select">
-        <option value="" class="option" >Filter by Keyword</option>
+      <select name="horns" class="select1">
+        <!-- <option value="" class="option" >Filter by Keyword</option> -->
+
       </select>
       <!-- <select>
         <option value="default">Filter by Keyword</option>
@@ -43,14 +44,16 @@
     </header>
     <main>
 
+<section >
 
-
+</section>
+<!-- 
       <div class="photo-template">
         <h2></h2>
         <img src="" alt="">
         <p></p>
       </div>
-   
+    -->
     </main>
     <footer>
       &copy; 2018 Code Fellows
