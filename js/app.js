@@ -11,7 +11,6 @@ function Animals(animals) {
     arrOfprop.push(this);
   }
 
-
 //this render using the Mustache templete  , look to the html file and see how the Mustache created using the script 
   Animals.prototype.render = function () {
 
@@ -31,8 +30,8 @@ function optionListRender(myImages,myKeyWord){
 if(myKeyWord.includes(animals.keyword)===true){}//use this method to filter the option list 
 else{
   myKeyWord.push(animals.keyword);
-   const opt = `<option>${animals.keyword}</option>`
-   $(".select1").append(opt);
+  const opt = `<option>${animals.keyword}</option>`
+  $(".select1").append(opt);
 }
 });
 }
@@ -60,7 +59,6 @@ function ajaxFunc(numOfPagge){
       let titleObject = new Animals(animals);
       myImages.push(titleObject);
 
-     
       // dogObject.renderManually();
       // titleObject.optionRender();
       titleObject.render();
@@ -68,7 +66,6 @@ function ajaxFunc(numOfPagge){
     // console.log(myKeyWord);
     // console.log(myImages);
     optionListRender(myImages,myKeyWord);
-
 
   });
 }
@@ -81,7 +78,7 @@ $('#select2').on('change', function() {
   if (selectedSortOption == 'byTitle') {
     arrOfprop.sort((a,b) => {
           if (a.title.toUpperCase() > b.title.toUpperCase()) return 1;
-          else if (a.title < b.title) return -1;
+          else if (a.title.toUpperCase() < b.title.toUpperCase()) return -1;
           else return 0;
       });
       $('div').hide();
@@ -107,29 +104,11 @@ $('#select2').on('change', function() {
   // console.log(selectedSortOption);
 });
 
-// function render2(value) {
-
-//   // To initiat the render for the selected keyword;
-//   // $('section').empty();
-
-//   for (var i = 0; i < arrOfprop.length; i++) {
-//       if ((arrOfprop[i].keyword) == value || value == 'filter by keword') {
-
-//           let musTemplate = $('#templete').html();
-//           let newObj = Mustache.render(musTemplate, arrOfprop[i]);
-//           $('section').append(newObj);
-
-//       }
-//   }
-// }
-
-
   $(".select1").on("change",function(event){
     let selectKeyword=this.value;
-    if(selectKeyword!=="select"){
+    if(selectKeyword!=="Filter by Keyword"  ){
       // console.log(selectKeyword);
       renderFilterhorns(selectKeyword);
-      // render2(selectKeyword);
     }
   });
 
@@ -143,6 +122,8 @@ else{
 }
   })
   }
-
+  
+// $('.filter').show()
+// $("div").hide()
 
 
