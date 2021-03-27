@@ -1,5 +1,5 @@
 'use strict';
-let arrOfprop = [];
+let arrOfprop = [];// this array contains the opjects
 let arrofOption =[];
 function Animals(animals) {
    
@@ -12,26 +12,25 @@ function Animals(animals) {
   }
 
 
-
+//this render using the Mustache templete  , look to the html file and see how the Mustache created using the script 
   Animals.prototype.render = function () {
 
-    let musTemplate = $('#templete').html();
-    let newObj = Mustache.render(musTemplate, this);
-    $('section').append(newObj);
+    let musTemplate = $('#templete').html();//creating the templete
+    let newObj = Mustache.render(musTemplate, this); //filling the parameter in the templete 
+    $('section').append(newObj);//append the Mustache to the normal section in the html 
 
     // this.optionRender();
 }
 
-
+//create the option list 
 function optionListRender(myImages,myKeyWord){
   $(".select1").empty();
   const opt1 = `<option value="" class="option" >Filter by Keyword</option>`
   $(".select1").append(opt1);
   myImages.forEach((animals)=>{
-if(myKeyWord.includes(animals.keyword)===true){}
+if(myKeyWord.includes(animals.keyword)===true){}//use this method to filter the option list 
 else{
   myKeyWord.push(animals.keyword);
-  // containerPerson.find(".keywordoptions").text(`${animals.keyword}`)
    const opt = `<option>${animals.keyword}</option>`
    $(".select1").append(opt);
 }
@@ -41,10 +40,10 @@ else{
     method: "get",
     dataType: "json",
   };
-  
+
 let numOfPagge = $('button').on('click',function(){
   $('div').hide();
-  arrOfprop=[]
+  arrOfprop=[]; // to make the array of object empty 
   numOfPagge = $(this).attr('id')
   // renderFilterhorns(selectKeyword);
   ajaxFunc(numOfPagge);
@@ -61,14 +60,16 @@ function ajaxFunc(numOfPagge){
       let titleObject = new Animals(animals);
       myImages.push(titleObject);
 
-      // console.log(myImages);
+     
       // dogObject.renderManually();
       // titleObject.optionRender();
       titleObject.render();
     });
+    // console.log(myKeyWord);
+    // console.log(myImages);
     optionListRender(myImages,myKeyWord);
 
-    // console.log(myKeyWord);
+
   });
 }
 
@@ -106,21 +107,21 @@ $('#select2').on('change', function() {
   // console.log(selectedSortOption);
 });
 
-function render2(value) {
+// function render2(value) {
 
-  // To initiat the render for the selected keyword;
-  // $('section').empty();
+//   // To initiat the render for the selected keyword;
+//   // $('section').empty();
 
-  for (var i = 0; i < arrOfprop.length; i++) {
-      if ((arrOfprop[i].keyword) == value || value == 'filter by keword') {
+//   for (var i = 0; i < arrOfprop.length; i++) {
+//       if ((arrOfprop[i].keyword) == value || value == 'filter by keword') {
 
-          let musTemplate = $('#templete').html();
-          let newObj = Mustache.render(musTemplate, arrOfprop[i]);
-          $('section').append(newObj);
+//           let musTemplate = $('#templete').html();
+//           let newObj = Mustache.render(musTemplate, arrOfprop[i]);
+//           $('section').append(newObj);
 
-      }
-  }
-}
+//       }
+//   }
+// }
 
 
   $(".select1").on("change",function(event){
@@ -129,7 +130,6 @@ function render2(value) {
       // console.log(selectKeyword);
       renderFilterhorns(selectKeyword);
       // render2(selectKeyword);
-
     }
   });
 
