@@ -44,6 +44,7 @@ else{
   
 let numOfPagge = $('button').on('click',function(){
   $('div').hide();
+  arrOfprop=[]
   numOfPagge = $(this).attr('id')
   // renderFilterhorns(selectKeyword);
   ajaxFunc(numOfPagge);
